@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>SC3-1-1-text</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+</head>
+<body>
+
+<nav class="navbar navbar-inverse">
+  <div class="container">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="../index.html">Auto-WCAG Rules</a>
+    </div>
+    <div id="navbar" class="collapse navbar-collapse">
+      <ul class="nav navbar-nav">
+        <li><a href="../rules.html">Rules</a></li>
+        <li><a href="../methodology.html">Test Methodology</a></li>
+        <li><a href="https://www.w3.org/community/auto-wcag/">Auto-WCAG Website</a></li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div>
+</nav>
+
+<main class="container">
+  <h1 id="sc3-1-1-text">SC3-1-1-text</h1>
+<p>This test belongs to [[3.1.1 Language of Page]].</p>
+<h2 id="description">Description</h2>
+<p>This test checks that the primary language of the content is specified correctly by the language attribute of the <code>&lt;html&gt;</code>-element.</p>
+<h2 id="background">Background</h2>
+<ul>
+<li><a href="httphttp://www.w3.org/TR/2014/NOTE-WCAG20-TECHS-20140408/H57"> H57: Using language attributes on the html element</a></li>
+<li><a href="httphttp://wiki.egovmon.no/wiki/SC3.1.1">eGovMon test for H57</a></li>
+<li><a href="httphttp://www.rfc-editor.org/rfc/bcp/bcp47.txt">BCP 47: Tags for the Identification of Languages</a></li>
+<li><a href="httphttp://www.iana.org/assignments/language-subtag-registry/language-subtag-registry">IANA language subtag registry</a></li>
+</ul>
+<h2 id="assumptions">Assumptions</h2>
+<ul>
+<li>The comparison of language-code does not look for exact matches. Technique H57 states: &quot;Use of the primary code is important for this technique.&quot; which means that region subtags can be ignored in the comparison, i.e. &quot;en-GB&quot; is the same as &quot;en&quot;.</li>
+<li>This test assumes that the language of the web page has been specified in the <code>lang</code> attribute of the <code>&lt;html&gt;</code> element (see also [[SC3-1-1-html]]). The <code>xml:lang</code> attribute is not taken into account because tests have shown, that <code>xml:lang</code> is ignored by screenreaders.</li>
+<li>There are different possible definitions of &quot;primary language&quot; of a web page:<ol>
+<li>language of the majority of content</li>
+<li>language of interface</li>
+<li>language of the intended audience</li>
+</ol>
+</li>
+</ul>
+<p>This test does not prescribe which of these definitions to use as long as one of them is used.<br/>
+<em>Note that all language changes must be marked correctly independent of the chosen definition. This is covered by [[3.1.2 Language of Parts]].</em></p>
+<h2 id="test-properties">Test properties</h2>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Success Criterion</td>
+<td>[[3.1.1 Language of Page]]</td>
+</tr>
+<tr>
+<td>Test mode</td>
+<td>SemiAuto</td>
+</tr>
+<tr>
+<td>Test environment</td>
+<td>DOM</td>
+</tr>
+<tr>
+<td>Test subject</td>
+<td>Single web page</td>
+</tr>
+</tbody>
+</table>
+<h2 id="test-procedure">Test procedure</h2>
+<h3 id="selector">Selector</h3>
+<p>Test method: [automatic]
+L1 = value of <code>lang</code> attribute.</p>
+<h3 id="step-1">Step 1</h3>
+<p>Test method: [automatic]
+Select a continuous run of text from one or more consecutive <code>p</code>-elements. If no <code>p</code>-elements exist, select any text from the body of the web page. The text should be at least 300 characters in length and not contain any language changes, i.e. lang-attributes on the element or its parent. If no such text is found, continue with [[#Step 2|Step 2]].</p>
+<p>Use a [[language identification algorithm]] to check if L1 is the language of the selected text.</p>
+<p>If yes, return</p>
+<table>
+<thead>
+<tr>
+<th>Outcome</th>
+<th>Passed</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Testcase</td>
+<td>SC311-text</td>
+</tr>
+<tr>
+<td>ID</td>
+<td>SC311-text-pass1</td>
+</tr>
+</tbody>
+</table>
+<p>Else continue with [[#Step 2|Step 2]].</p>
+<h3 id="step-2">Step 2</h3>
+<p>Test method: [manual]</p>
+<p>Present the page to the user.<br/>
+Question: Is L1 the primary language of this page?</p>
+<p><em>Note that language code L1 should be presented in human readable form, e.g. using the description from the <a href="httphttp://www.iana.org/assignments/language-subtag-registry/language-subtag-registry">language subtag registry</a>.</em></p>
+<p>Help text: &quot;Primary language&quot; means the language of the majority of the text on the page or the language of the interface (navigation menu etc.) of the page.</p>
+<p>If yes, return</p>
+<table>
+<thead>
+<tr>
+<th>Outcome</th>
+<th>Passed</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Testcase</td>
+<td>SC311-text</td>
+</tr>
+<tr>
+<td>ID</td>
+<td>SC311-text-pass2</td>
+</tr>
+</tbody>
+</table>
+<p>Else return</p>
+<table>
+<thead>
+<tr>
+<th>Outcome</th>
+<th>Failed</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Testcase</td>
+<td>SC311-text</td>
+</tr>
+<tr>
+<td>ID</td>
+<td>SC311-text-fail1</td>
+</tr>
+<tr>
+<td>Error</td>
+<td>The primary language of the page is not specified correctly.</td>
+</tr>
+<tr>
+<td>Info</td>
+<td>L1</td>
+</tr>
+</tbody>
+</table>
+
+</main>
+
+</body>
+</html>

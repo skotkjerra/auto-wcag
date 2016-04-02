@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>SC4-1-2-button</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+</head>
+<body>
+
+<nav class="navbar navbar-inverse">
+  <div class="container">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="../index.html">Auto-WCAG Rules</a>
+    </div>
+    <div id="navbar" class="collapse navbar-collapse">
+      <ul class="nav navbar-nav">
+        <li><a href="../rules.html">Rules</a></li>
+        <li><a href="../methodology.html">Test Methodology</a></li>
+        <li><a href="https://www.w3.org/community/auto-wcag/">Auto-WCAG Website</a></li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div>
+</nav>
+
+<main class="container">
+  <h1 id="sc4-1-2-button">SC4-1-2-button</h1>
+<h2 id="description">Description</h2>
+<p>This test checks if every button element has a name.</p>
+<h2 id="background">Background</h2>
+<ul>
+<li><a href="http://www.w3.org/TR/2014/NOTE-WCAG20-TECHS-20140311/H91.html">H91: Using HTML form controls and links</a></li>
+<li><a href="http://wiki.egovmon.no/wiki/SC4.1.2#ID:_H91-2">eGovMon test H91-2</a></li>
+</ul>
+<h2 id="assumptions">Assumptions</h2>
+<ul>
+<li>The test case does not look at buttons with img content</li>
+</ul>
+<h2 id="test-properties">Test properties</h2>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Success Criterion</td>
+<td>[[4.1.2 Name, Role, Value]]</td>
+</tr>
+<tr>
+<td>Test mode</td>
+<td>automatic</td>
+</tr>
+<tr>
+<td>Test environment</td>
+<td>DOM</td>
+</tr>
+<tr>
+<td>Test subject</td>
+<td>single web page</td>
+</tr>
+</tbody>
+</table>
+<h2 id="test-procedure">Test procedure</h2>
+<h3 id="selector">Selector</h3>
+<p>Test method: [automatic]</p>
+<p>Select any button element. The following CSS selector could be used: “button”</p>
+<h3 id="step-1">Step 1</h3>
+<p>Test method: [automatic]</p>
+<ul>
+<li>IF there is [[non-empty]] text within the button element:<ul>
+<li>Return SC412-button-pass;</li>
+</ul>
+</li>
+<li>IF the button element has a title attribute with a [[non-empty]] value:<ul>
+<li>Return SC412-button-pass;</li>
+</ul>
+</li>
+<li>ELSE Return SC412-button-fail;</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Outcome</th>
+<th>Passed</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Testcase</td>
+<td>SC412-button</td>
+</tr>
+<tr>
+<td>ID</td>
+<td>SC412-button-pass</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Outcome</th>
+<th>Failed</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Testcase</td>
+<td>SC412-button</td>
+</tr>
+<tr>
+<td>Error</td>
+<td>failed to give an anchor element a name</td>
+</tr>
+<tr>
+<td>Info</td>
+<td>This button element has no filled title attribute nor text content.</td>
+</tr>
+<tr>
+<td>ID</td>
+<td>SC412-button-fail</td>
+</tr>
+</tbody>
+</table>
+
+</main>
+
+</body>
+</html>

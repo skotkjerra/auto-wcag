@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>SC2-4-7-focus-in-viewport</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+</head>
+<body>
+
+<nav class="navbar navbar-inverse">
+  <div class="container">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="../index.html">Auto-WCAG Rules</a>
+    </div>
+    <div id="navbar" class="collapse navbar-collapse">
+      <ul class="nav navbar-nav">
+        <li><a href="../rules.html">Rules</a></li>
+        <li><a href="../methodology.html">Test Methodology</a></li>
+        <li><a href="https://www.w3.org/community/auto-wcag/">Auto-WCAG Website</a></li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div>
+</nav>
+
+<main class="container">
+  <h1 id="sc2-4-7-focus-in-viewport">SC2-4-7-focus-in-viewport</h1>
+<p>This test case belongs to [[2.4.7 Focus Visible]]</p>
+<h2 id="description">Description</h2>
+<p>This test checks that all elements that receive focus are visible in the viewport.</p>
+<h2 id="background">Background</h2>
+<ul>
+<li><a href="http://www.w3.org/TR/2014/NOTE-WCAG20-TECHS-20140916/G149">G149: Using user interface components that are highlighted by the user agent when they receive focus</a></li>
+<li><a href="http://www.w3.org/TR/2014/NOTE-WCAG20-TECHS-20140916/C15">C15: Using CSS to change the presentation of a user interface component when it receives focus</a></li>
+</ul>
+<h2 id="assumptions">Assumptions</h2>
+<ul>
+<li>Focus styles are only applied when the focus of browser viewport has the focus of the operating system. Scripts that give focus to elements do not update the style of that element unless the user is focused on this particular viewport in the OS.</li>
+</ul>
+<h2 id="test-properties">Test properties</h2>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Test name</td>
+<td>Focused element visible in viewport</td>
+</tr>
+<tr>
+<td>Success Criterion</td>
+<td>[[2.4.7 Focus Visible]]</td>
+</tr>
+<tr>
+<td>Test mode</td>
+<td>Automatic</td>
+</tr>
+<tr>
+<td>Test environment</td>
+<td>Remote Controlled User Agent</td>
+</tr>
+<tr>
+<td>Test subject</td>
+<td>Single web page</td>
+</tr>
+</tbody>
+</table>
+<h2 id="test-procedure">Test procedure</h2>
+<h3 id="selector">Selector</h3>
+<p>Test method: [automatic]</p>
+<p>Each element that matches one of the following CSS selectors</p>
+<ul>
+<li>a[href]:not([tabindex=-1]),</li>
+<li>button:not([tabindex=-1]),</li>
+<li>select:not([tabindex=-1]),</li>
+<li>textarea:not([tabindex=-1]),</li>
+<li>input:not([tabindex=-1]):not([type=hidden]),</li>
+<li>*[tabindex]:not([tabindex=-1])</li>
+</ul>
+<h3 id="step-1">Step 1</h3>
+<p>Test method: [automatic]</p>
+<p>Give focus to the selected element.</p>
+<p>Check that the offsetTop is equal or greater than 0 AND that the offset left minus the textIndent is equal or greater than 0</p>
+<p>If yes, return:</p>
+<table>
+<thead>
+<tr>
+<th>Outcome</th>
+<th>Passed</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Testcase</td>
+<td>SC2-4-7-focus-in-viewport</td>
+</tr>
+<tr>
+<td>ID</td>
+<td>SC2-4-7-focus-in-viewport-passed1</td>
+</tr>
+</tbody>
+</table>
+<p>If no, return:</p>
+<table>
+<thead>
+<tr>
+<th>Outcome</th>
+<th>Failed</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Testcase</td>
+<td>SC2-4-7-focus-in-viewport</td>
+</tr>
+<tr>
+<td>ID</td>
+<td>SC2-4-7-focus-in-viewport-failed</td>
+</tr>
+<tr>
+<td>Error</td>
+<td>The element should be inside the viewport when it receives focus</td>
+</tr>
+</tbody>
+</table>
+
+</main>
+
+</body>
+</html>

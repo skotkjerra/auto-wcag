@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>SC3-1-2-lang</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+</head>
+<body>
+
+<nav class="navbar navbar-inverse">
+  <div class="container">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="../index.html">Auto-WCAG Rules</a>
+    </div>
+    <div id="navbar" class="collapse navbar-collapse">
+      <ul class="nav navbar-nav">
+        <li><a href="../rules.html">Rules</a></li>
+        <li><a href="../methodology.html">Test Methodology</a></li>
+        <li><a href="https://www.w3.org/community/auto-wcag/">Auto-WCAG Website</a></li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div>
+</nav>
+
+<main class="container">
+  <h1 id="sc3-1-2-lang">SC3-1-2-lang</h1>
+<p>This test belongs to [[3.1.2 Language of Parts]].</p>
+<h2 id="description">Description</h2>
+<p>This test checks that <code>lang</code> attributes within the body of a web page are correct.</p>
+<h2 id="background">Background</h2>
+<ul>
+<li><a href="http://www.w3.org/TR/2014/NOTE-WCAG20-TECHS-20140408/H58">H58: Using language attributes to identify changes in the human language</a></li>
+<li><a href="http://wiki.egovmon.no/wiki/SC3.1.2#Element_descendent-or-self::body.5B.40lang.5D_or_descendent-or-self::body.5B.40xml:lang.5D">eGovMon test for SC3.1.2</a></li>
+<li><a href="http://www.rfc-editor.org/rfc/bcp/bcp47.txt">BCP 47: Tags for the Identification of Languages</a></li>
+</ul>
+<h2 id="assumptions">Assumptions</h2>
+<ul>
+<li>The comparison of language-code does not look for exact matches. Technique H57 states: &quot;Use of the primary code is important for this technique.&quot; which means that region subtags can be ignored in the comparison, i.e. &quot;en-GB&quot; is the same as &quot;en&quot;.</li>
+<li>This test checks the <code>lang</code> attributes. The <code>xml:lang</code> attributes are not taken into account because tests have shown, that <code>xml:lang</code> is ignored by screenreaders. (Both Jaws 15 with FF and IE and NVDA with FF go by lang attribute, xml:lang is ignored.) The <code>xml:lang</code> attributes are checked by a separate test: [[SC3-1-2-xml-lang]].</li>
+</ul>
+<h2 id="test-properties">Test properties</h2>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Test name</td>
+<td>Languages within the body</td>
+</tr>
+<tr>
+<td>Success Criterion</td>
+<td>[[3.1.2 Language of Parts]]</td>
+</tr>
+<tr>
+<td>Test mode</td>
+<td>Automatic</td>
+</tr>
+<tr>
+<td>Test environment</td>
+<td>DOM</td>
+</tr>
+<tr>
+<td>Test subject</td>
+<td>Single web page</td>
+</tr>
+</tbody>
+</table>
+<h2 id="test-procedure">Test procedure</h2>
+<h3 id="selector">Selector</h3>
+<p>Test method: [automatic]</p>
+<p><code>descendent-or-self::body[@lang]</code></p>
+<p>This test is applied to all elements with <code>lang</code> attribute in the body of the web page (including the body element itself).</p>
+<h3 id="step-1">Step 1</h3>
+<p>Test method: [automatic]</p>
+<p>L1 = value of <code>lang</code> attribute.</p>
+<p>Compare L1 to BCP 47.</p>
+<p>If L1 is not on the list, return</p>
+<table>
+<thead>
+<tr>
+<th>Outcome</th>
+<th>Failed</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Testcase</td>
+<td>SC312-lang</td>
+</tr>
+<tr>
+<td>ID</td>
+<td>SC312-lang-fail1</td>
+</tr>
+<tr>
+<td>Error</td>
+<td>Unknown language code.</td>
+</tr>
+<tr>
+<td>Info</td>
+<td>L1</td>
+</tr>
+</tbody>
+</table>
+<p><em>Note that this step also fails if L1 contains only whitespace or is empty.</em></p>
+<p>Else, return</p>
+<table>
+<thead>
+<tr>
+<th>Outcome</th>
+<th>Passed</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Testcase</td>
+<td>SC312-lang</td>
+</tr>
+<tr>
+<td>ID</td>
+<td>SC312-lang-pass1</td>
+</tr>
+</tbody>
+</table>
+
+</main>
+
+</body>
+</html>
