@@ -2,8 +2,9 @@
 rule_id: SC2-4-4+SC4-1-2-link-names
 name: Links have an accessible name
 test_mode: automatic
+environment: DOM Structure
 
-criteria:
+success_criterion:
 - 2.4.4 # Link Purpose (In Context) (Level A)
 - 4.1.2 # Name, Role, Value (Level A)
 
@@ -25,29 +26,15 @@ This rule checks that all links have an accessible name.
 
 *No known assumptions.*
 
-## Test properties
-
-| Property          | Value
-|-------------------|----
-| Test name         | Links have an accessible name
-| Success Criterion | 2.4.4 Link Purpose (In Context), 4.1.2 Name, Role, Value
-| Test mode         | automatic
-| Test environment  | Rendered page
-| Test subject      | Single web page
-
 ## Test procedure
 
 ### Selector
 
-Test mode: [automatic][AUTO]
-
-Select elements matching the following CSS selector:
+Select all elements matching the following CSS selector:
 
 	a[href]:not([role]), *[role=link]
 
 ### Step 1
-
-Test mode: [automatic][AUTO]
 
 Check if the selected element has an `aria-label` or `aria-labelledby` attribute.
 
@@ -57,17 +44,9 @@ Else, continue with step [Step 2](#step-2-no-aria)
 
 ### Step 2: no ARIA
 
-Test mode: [automatic][AUTO]
-
 Concatenate the selected element's [rendered text][RNDTXT] and the text of the `title` attribute, in variable T1.
 
-If T1 is [non-empty][NEMPTY], return:
-
-| Outcome  | Passed
-|----------|-----
-| Testcase | SC2-4-4+SC4-1-2-link-names
-| ID       | SC2-4-4+SC4-1-2-link-names-passed1
-| Info     | Link contains text
+If T1 is [non-empty][NEMPTY], return [step2-pass](#step2-pass)
 
 Else, continue with [Step 3](#step-3)
 
@@ -77,70 +56,97 @@ Check if the selected element contains an `img` element or an `input` element of
 
 If yes, continue with [Step 4](#step-4-liked-images)
 
-Else, return:
-
-| Outcome  | Failed
-|----------|-----
-| Testcase | {{ page.rule_id }}
-| ID       | {{ page.rule_id }}-failed1
-| Error    | The links must have a name, either though the link text or by the `title` attribute.
+Else, return [step3-fail](#step3-fail)
 
 ### Step 4: Linked images
 
-Test mode: [automatic][AUTO]
-
 Take all images from step 3, that do not have `[role=presentation]` and are not hidden through `display:none` or `visibility:hidden`.
 
-If there are no such images, return:
-
-| Outcome  | Failed
-|----------|-----
-| Testcase | {{ page.rule_id }}
-| ID       | {{ page.rule_id }}-failed2
-| Error    | Ensure that images within the link are not ignored by assistive technologies.
+If there are no such images, return [step4-fail](#step4-fail1)
 
 Get the text alternatives of the images using the [Text Alternative Computation][TXTALT] Algorithm. Concatenate the resulting texts into variable T2.
 
-If T2 contains [non-empty][NEMPTY] text, return:
+If T2 contains [non-empty][NEMPTY] text, return [step4-pass](step4-pass)
 
-| Outcome  | Passed
-|----------|-----
-| Testcase | {{ page.rule_id }}
-| ID       | {{ page.rule_id }}-passed2
-| Info     | The link contains images with a text alternative
-
-Else return:
-
-| Outcome  | Failed
-|----------|-----
-| Testcase | {{ page.rule_id }}
-| ID       | {{ page.rule_id }}-failed3
-| Error    | An image is the only content of this anchor and so it should have a text alternative to give a name to the link.
+Else return [step4-fail2](#step4-fail2)
 
 ### Step 5: ARIA labels
 
-Test mode: [automatic][AUTO]
-
 Concatenate the selected element's `aria-label` attribute, and the [text content][TXTCNT] of an element referred to with the `aria-labeledby` attribute, in variable T3.
 
-If T3 contains [non-empty][NEMPTY] text, return:
+If T3 contains [non-empty][NEMPTY] text, return [step5-pass](#step5-pass)
 
-| Outcome  | Passed
-|----------|-----
-| Testcase | {{ page.rule_id }}
-| ID       | {{ page.rule_id }}-passed3
-| Info     | The link has an accessible name through ARIA labels
+Else, return [step5-fail](#step5-fail)
 
-Dlese, return:
+## Outcome
 
-| Outcome  | Failed
-|----------|-----
-| Testcase | {{ page.rule_id }}
-| ID       | {{ page.rule_id }}-failed4
-| Error    | The link's aria label does not provide an alternative
+The resulting assertion is as follows,
 
-[AUTO]: ../pages/test-modes.html#automatic
-[MANUAL]: ../pages/test-modes.html#manual
+| Property | Value
+|----------|----------
+| type     | Assertion
+| test     | auto-wcag:SC2-4-4+SC4-1-2-link-names
+| subject  | *the selected element*
+| mode     | automatic
+| result   | <One TestResult from below>
+
+### step2-pass
+
+| Property    | Value
+|-------------|----------
+| type        | TestResult
+| outcome     | Passed
+| description | Link contains text
+
+### step3-fail
+
+| Property    | Value
+|-------------|----------
+| type        | TestResult
+| outcome     | Failed
+| description | The links must have a name, either though the link text or by the `title` attribute.
+
+### step4-fail1
+
+| Property    | Value
+|-------------|----------
+| type        | TestResult
+| outcome     | Failed
+| description | Ensure that images within the link are not ignored by assistive technologies.
+
+### step4-pass
+
+| Property    | Value
+|-------------|----------
+| type        | TestResult
+| outcome     | Passed
+| description | The link contains images with a text alternative
+
+### step4-fail2
+
+| Property    | Value
+|-------------|----------
+| type        | TestResult
+| outcome     | Failed
+| description | An image is the only content of this anchor and so it should have a text alternative to give a name to the link.
+
+### step5-pass
+
+| Property    | Value
+|-------------|----------
+| type        | TestResult
+| outcome     | Passed
+| description | The link has an accessible name through ARIA labels
+
+### step5-fail
+
+| Property    | Value
+|-------------|----------
+| type        | TestResult
+| outcome     | Failed
+| description | The link's aria label does not provide an alternative
+
+
 [NEMPTY]: ../pages/algorihms/none-empty.html
 [TXTALT]: ../pages/algorithms/text-alternative-compute.html
 [RNDTXT]: ../pages/algorithms/rendered-text.html
