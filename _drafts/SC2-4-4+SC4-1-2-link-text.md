@@ -146,6 +146,9 @@ The resulting assertion is as follows,
 | outcome     | Failed
 | description | The link's aria label does not provide an alternative
 
+## Implementation Tests
+
+Implementation tests are available at: [{{ page.rule_id}} tests](../draft-tests/{{ page.rule_id }}.html)
 
 [NEMPTY]: ../pages/algorihms/none-empty.html
 [TXTALT]: ../pages/algorithms/text-alternative-compute.html

@@ -1,0 +1,98 @@
+---
+layout: default
+title: Tests for SC2-4-4+SC4-1-2-link-text
+---
+
+<p>Elements that match <code>[data-outcome="inapplicable"]</code> should be ignored by the rule. Elements that match <code>[data-outcome="failed"]</code> should be returned as failed, and those matching <code>[data-outcome="passed"]</code> should be passed.</p>
+
+<h2>inapplicable</h2>
+
+<div data-outcome="inapplicable">
+  <a href="#" role="button">A button</a>
+</div>
+
+<div data-outcome="inapplicable">
+  <button role="link">A fake link</button>
+</div>
+
+
+<h2>step2-pass</h2>
+
+<div data-outcome="passed" data-outcome-id="step2-pass">
+  <a href="#">A link</a>
+</div>
+
+
+<h2>step3-fail</h2>
+
+<div data-outcome="failed" data-outcome-id="step3-fail">
+  <a href="#">   </a>
+</div>
+
+
+<h2>step4-fail1</h2>
+
+<div data-outcome="failed" data-outcome-id="step4-fail1">
+  <a href="#"> <img src="/x.png" alt="my image" role="presentation" /> </a>
+</div>
+
+<div data-outcome="failed" data-outcome-id="step4-fail1">
+  <a href="#"> <img src="/x.png" alt="my image" style="display: none;" /> </a>
+</div>
+
+<div data-outcome="failed" data-outcome-id="step4-fail1">
+  <a href="#"> <img src="/x.png" alt="my image" style="visibility: hidden;" /> </a>
+</div>
+
+<h2>step4-pass</h2>
+
+<div data-outcome="passed" data-outcome-id="step4-pass">
+  <a href="#"> <img src="/x.png" alt="my image" /> </a>
+</div>
+
+<div data-outcome="passed" data-outcome-id="step4-pass">
+  <a href="#">
+    <img src="/x.png" alt="" />
+    <img src="/x.png" alt="my image" />
+  </a>
+</div>
+
+
+<h2>step4-fail2</h2>
+
+<div data-outcome="failed" data-outcome-id="step4-fail2">
+  <a href="#"> <img src="/x.png" alt=" " /> </a>
+</div>
+
+<div data-outcome="failed" data-outcome-id="step4-fail2">
+  <a href="#">
+    <img src="/x.png" alt=" " />
+    <img src="/x.png" alt="" />
+  </a>
+</div>
+
+
+<h2>step5-pass</h2>
+
+<div data-outcome="passed" data-outcome-id="step5-pass">
+  <a href="#" aria-label="my link"></a>
+</div>
+
+<div data-outcome="passed" data-outcome-id="step5-pass">
+  <a href="#" aria-labelledby="link-label1 link-label2"></a>
+</div>
+<p id="link-label1"></p>
+<p id="link-label2">My alternative</p>
+
+
+<h2>step5-fail</h2>
+
+<div data-outcome="failed" data-outcome-id="step5-fail">
+  <a href="#" aria-label=" "></a>
+</div>
+
+<div data-outcome="failed" data-outcome-id="step5-fail">
+  <a href="#" aria-labelledby="link-label1 link-label2"></a>
+</div>
+<p id="link-label1">  </p>
+<p id="link-label2"></p>
