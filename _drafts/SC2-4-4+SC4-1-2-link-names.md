@@ -1,6 +1,6 @@
 ---
-rule_id: SC2-4-4+SC4-1-2-link-names
-name: Links have an accessible name
+rule_id: SC2-4-4+SC4-1-2-link-text
+name: Links have text or an accessible name
 test_mode: automatic
 environment: DOM Structure
 
@@ -14,7 +14,7 @@ authors:
 
 ## Description
 
-This rule checks that all links have an accessible name.
+This rule checks that all links have textual content, or for links with only images, that an image has a textual alternative. Links can also be made accessible by adding an accessible name through `aria-label` or `aria-labelledby`.
 
 ## Background
 
@@ -32,7 +32,7 @@ This rule checks that all links have an accessible name.
 
 Select all elements matching the following CSS selector:
 
-	a[href]:not([role]), *[role=link]
+	a[href]:not([role])
 
 ### Step 1
 
@@ -44,9 +44,9 @@ Else, continue with step [Step 2](#step-2-no-aria)
 
 ### Step 2: no ARIA
 
-Concatenate the selected element's [rendered text][RNDTXT] and the text of the `title` attribute, in variable T1.
+Concatenate the selected element's [rendered text][RNDTXT] and the text of the `title` attribute.
 
-If T1 is [non-empty][NEMPTY], return [step2-pass](#step2-pass)
+If the concatenated text is [non-empty][NEMPTY], return [step2-pass](#step2-pass)
 
 Else, continue with [Step 3](#step-3)
 
@@ -54,7 +54,7 @@ Else, continue with [Step 3](#step-3)
 
 Check if the selected element contains an `img` element or an `input` element of `type=image`, 
 
-If yes, continue with [Step 4](#step-4-liked-images)
+If yes, continue with [Step 4](#step-4-Linked-images)
 
 Else, return [step3-fail](#step3-fail)
 
@@ -64,9 +64,9 @@ Take all images from step 3, that do not have `[role=presentation]` and are not 
 
 If there are no such images, return [step4-fail](#step4-fail1)
 
-Get the text alternatives of the images using the [Text Alternative Computation][TXTALT] Algorithm. Concatenate the resulting texts into variable T2.
+Get the text alternatives of the images using the [Text Alternative Computation][TXTALT] Algorithm. Concatenate the resulting texts.
 
-If T2 contains [non-empty][NEMPTY] text, return [step4-pass](step4-pass)
+If the doncatenated text contains [non-empty][NEMPTY] text, return [step4-pass](step4-pass)
 
 Else return [step4-fail2](#step4-fail2)
 
@@ -85,9 +85,9 @@ The resulting assertion is as follows,
 | Property | Value
 |----------|----------
 | type     | Assertion
-| test     | auto-wcag:SC2-4-4+SC4-1-2-link-names
+| test     | auto-wcag:auto-wcag:{{ page.rule_id }}
 | subject  | *the selected element*
-| mode     | automatic
+| mode     | earl:{{ page.test_mode }}
 | result   | <One TestResult from below>
 
 ### step2-pass
